@@ -1,0 +1,10 @@
+<view class="page">
+  <input class="search-input" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="search" placeholder="搜索課程、文章、關鍵字" />
+  <view wx:for="{{results}}" wx:key="id" class="card">
+    <image class="card-image" mode="aspectFill" src="{{item.cover || fallbackCover}}" />
+    <view class="card-body">
+      <view>{{item.title}}</view>
+      <view class="muted">{{item.author}} {{item.lecture_time}}</view>
+    </view>
+  </view>
+</view>

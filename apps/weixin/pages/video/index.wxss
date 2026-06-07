@@ -1,0 +1,3 @@
+.card:first-of-type {
+  border-left: 8rpx solid #284734;
+}

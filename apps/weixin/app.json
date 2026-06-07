@@ -1,0 +1,34 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/video/index",
+    "pages/player/index",
+    "pages/search/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "熏聞成種",
+    "navigationBarBackgroundColor": "#284734",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f6f7f4"
+  },
+  "tabBar": {
+    "color": "#677268",
+    "selectedColor": "#284734",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首頁"
+      },
+      {
+        "pagePath": "pages/video/index",
+        "text": "影音"
+      },
+      {
+        "pagePath": "pages/search/index",
+        "text": "搜索"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

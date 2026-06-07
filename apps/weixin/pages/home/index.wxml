@@ -1,0 +1,10 @@
+<view class="page">
+  <view class="title">熏聞成種</view>
+  <view wx:for="{{recommendList}}" wx:key="id" class="card" bindtap="goPlayer" data-album-id="{{item.album_id}}" data-id="{{item.id}}">
+    <image class="card-image" mode="aspectFill" src="{{item.cover || fallbackCover}}" />
+    <view class="card-body">
+      <view>{{item.title}}</view>
+      <view class="muted">{{item.author}} {{item.lecture_time}}</view>
+    </view>
+  </view>
+</view>

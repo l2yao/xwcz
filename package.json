@@ -1,0 +1,15 @@
+{
+  "name": "xwcz",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cross-platform clone foundation for xwcz.org using the existing xwcz API.",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "check": "node packages/api-client/test-smoke.mjs",
+    "serve:web": "npx --yes vite apps/web --host 127.0.0.1"
+  },
+  "devDependencies": {}
+}
