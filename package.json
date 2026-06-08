@@ -9,7 +9,10 @@
   ],
   "scripts": {
     "check": "node packages/api-client/test-smoke.mjs",
-    "serve:web": "npx --yes vite apps/web --host 127.0.0.1"
+    "build:web": "vite build apps/web --base /xwcz/",
+    "serve:web": "vite apps/web --host 127.0.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "vite": "^7.0.0"
+  }
 }

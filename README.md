@@ -35,10 +35,25 @@ https://live.xwcz.org/
 
 ```powershell
 cd xwcz
+npm install
 npm run serve:web
 ```
 
-The script uses `npx vite`, so it may need network access the first time if Vite is not already cached.
+## Publish Web Prototype to GitHub Pages
+
+The repository includes a GitHub Actions workflow that publishes `apps/web` to GitHub Pages on every push to `main`.
+
+In GitHub, open the repository settings and set:
+
+```text
+Pages -> Build and deployment -> Source -> GitHub Actions
+```
+
+Then push `main`. The site will be served at:
+
+```text
+https://<your-github-user>.github.io/xwcz/
+```
 
 ## Weixin Setup Notes
 
