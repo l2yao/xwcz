@@ -2,34 +2,33 @@
 <html lang="zh-Hant">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>熏聞成種</title>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
     <div id="app">
-      <header class="topbar">
-        <button class="brand" data-route="home">熏聞成種</button>
-        <form id="search-form" class="search">
-          <input id="search-input" name="q" type="search" placeholder="搜索課程、文章、關鍵字" />
-          <button type="submit">搜索</button>
-        </form>
-      </header>
-
-      <main>
-        <section id="view" class="view">
-          <div class="loading">載入中...</div>
-        </section>
+      <main id="view" class="view">
+        <div class="loading">載入中...</div>
       </main>
 
       <nav class="tabbar">
-        <button data-route="home">首頁</button>
-        <button data-route="video">影音</button>
-        <button data-route="articles">資訊</button>
-        <button data-route="live">直播</button>
+        <button class="tabbar-item" data-route="home">
+          <svg class="tabbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span class="tabbar-text">首頁</span>
+        </button>
+        <button class="tabbar-item" data-route="articles">
+          <img class="tabbar-icon img-icon" src="https://api.xwcz.org/static/chengde_v1/image/video_camera.png" alt="最新動態" />
+          <span class="tabbar-text">最新動態</span>
+        </button>
+        <button class="tabbar-item" data-route="timetable">
+          <svg class="tabbar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span class="tabbar-text">時間表</span>
+        </button>
       </nav>
     </div>
 
     <script type="module" src="./src/main.js"></script>
   </body>
 </html>
+
