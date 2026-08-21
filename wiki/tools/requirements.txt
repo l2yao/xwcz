@@ -1,0 +1,3 @@
+# No extra deps required (tools use stdlib + wiki/tools/api_client.py).
+# If you prefer requests over urllib, uncomment the next line and update api_client.py accordingly.
+# requests
