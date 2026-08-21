@@ -1,6 +1,6 @@
 ---
 type: manifest
-generated: 2026-08-20
+generated: 2026-08-21
 ---
 
 # 原始開示清單（xwcz）
