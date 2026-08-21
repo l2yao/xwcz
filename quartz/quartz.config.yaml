@@ -39,7 +39,7 @@ configuration:
         tertiary: "#68d391"
         highlight: rgba(99, 179, 237, 0.15)
         textHighlight: "rgba(179, 170, 2, 0.5)"
-  plugins:
+plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
     options:
@@ -221,7 +221,7 @@ configuration:
       unlistWhenEncrypted: false
       outputPath: static/encryptedContentIndex.json
     order: 900
-  layout:
+layout:
   groups:
     toolbar:
       priority: 35
