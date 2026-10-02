@@ -115,7 +115,7 @@ updated: 2026-08-20
 |---|---|---|---|
 | 1 | 15-003-0001 | [md](https://github.com/<owner>/xwcz/blob/main/doc/影音/樂在正論/會聽話、聽懂話/15-003-0001.md) · [正體doc](https://v.xwcz.org/CHT/15/15-003/15-003-0001.doc) | [mp3](https://v.xwcz.org/mp3/15/15-003/15-003-0001.mp3) |
 
-> 每集皆須列入；集數多（上百集）時亦須全列，不得省略。文字與影音連結依該集 download 旗標與 `media` frontmatter 取用，永不臆測。URL 一律經 `wiki/tools/api_client.py` 的 `get_text_url` / `get_audio_mp3_url` / `get_video_mp4_url` / `get_video_hls_url` / `get_poster_url` 產生，不得手拼。
+> 每集皆須列入；集數多（上百集）時亦須全列，不得省略。文字與影音連結依該集 download 旗標與 `media` frontmatter 取用，永不臆測——但旗標僅供參考，寫入前須以 HTTP HEAD 實測（`v.xwcz.org` 與 `v2.xwcz.org` 皆測）：曾有 `audio_download=1` 而 mp3 全 404、僅 m3u8 可播之例（如 16-058 全系列）。URL 一律經 `wiki/tools/api_client.py` 的 `get_text_url` / `get_audio_mp3_url` / `get_video_mp4_url` / `get_video_hls_url` / `get_poster_url` 產生，不得手拼。實測可用者才列，404 者改列可播之 m3u8（標「播放」）或記「—」。
 ```
 
 ### 概念頁 (concept)
