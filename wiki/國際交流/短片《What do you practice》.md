@@ -46,4 +46,4 @@ updated: 2026-08-21
 
 | 集數 | 檔名 | 文字 | 影音 |
 |---|---|---|---|
-| 1 | x10-032-0001 | [md](https://github.com/l2yao/xwcz/blob/main/doc/%E5%BD%B1%E9%9F%B3/%E5%9C%8B%E9%9A%9B%E4%BA%A4%E6%B5%81/%E7%9F%AD%E7%89%87%E3%80%8AWhat%20do%20you%20practice%E3%80%8B/x10-032-0001.md) · [正體doc](https://v.xwcz.org/CHT/x10/x10-032/x10-032-0001.doc) | [mp4](https://v.xwcz.org/mp4/x10/x10-032/x10-032-0001.mp4) |
+| 1 | x10-032-0001 | [md](https://github.com/l2yao/xwcz/blob/main/doc/%E5%BD%B1%E9%9F%B3/%E5%9C%8B%E9%9A%9B%E4%BA%A4%E6%B5%81/%E7%9F%AD%E7%89%87%E3%80%8AWhat%20do%20you%20practice%E3%80%8B/x10-032-0001.md) | [mp4](https://v.xwcz.org/mp4/x10/x10-032/x10-032-0001.mp4) |

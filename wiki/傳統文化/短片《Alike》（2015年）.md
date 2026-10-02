@@ -46,4 +46,4 @@ updated: 2026-08-21
 
 | 集數 | 檔名 | 文字 | 影音 |
 |---|---|---|---|
-| 1 | x10-017-0001 | [md](https://github.com/l2yao/xwcz/blob/main/doc/%E5%BD%B1%E9%9F%B3/%E5%82%B3%E7%B5%B1%E6%96%87%E5%8C%96/%E5%B8%AB%E9%81%93%E5%B0%8A%E5%9A%B4/%E7%9F%AD%E7%89%87%E3%80%8AAlike%E3%80%8B%EF%BC%882015%E5%B9%B4%EF%BC%89/x10-017-0001.md) · [正體doc](https://v.xwcz.org/CHT/x10/x10-017/x10-017-0001.doc) | [mp4](https://v.xwcz.org/mp4/x10/x10-017/x10-017-0001.mp4) |
+| 1 | x10-017-0001 | [md](https://github.com/l2yao/xwcz/blob/main/doc/%E5%BD%B1%E9%9F%B3/%E5%82%B3%E7%B5%B1%E6%96%87%E5%8C%96/%E5%B8%AB%E9%81%93%E5%B0%8A%E5%9A%B4/%E7%9F%AD%E7%89%87%E3%80%8AAlike%E3%80%8B%EF%BC%882015%E5%B9%B4%EF%BC%89/x10-017-0001.md) | [mp4](https://v.xwcz.org/mp4/x10/x10-017/x10-017-0001.mp4) |

@@ -8,7 +8,7 @@ date:
 place: 
 pages: 0
 raw: doc/影音/國際交流/成德法師學習分享平台 （越南配音）/Truyền Thừa Văn Hóa Truyền Thống Như Thế Nào/
-media: [CHT]
+media: []
 tags: [國際交流, 成德法師學習分享平台 （越南配音）]
 created: 2026-08-21
 updated: 2026-08-21
