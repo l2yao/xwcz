@@ -62,13 +62,13 @@ def fetch_album_episodes(album):
     return []
 
 
-def walk_category(node, path):
+def walk_category(node, path, model="video"):
     """Recursively fetch a category's albums + subcategories."""
     full_path = path + [node["title"]]
 
     def _subcats(_):
         try:
-            return category_list("video", node["id"])
+            return category_list(model, node["id"])
         except Exception:
             return {"data": {"rows": []}}
 
@@ -94,7 +94,7 @@ def walk_category(node, path):
             done += 1
             sleep(40)
 
-    children = [walk_category(sub, full_path) for sub in subcats]
+    children = [walk_category(sub, full_path, model) for sub in subcats]
 
     return {
         "id": node["id"],
@@ -113,6 +113,51 @@ def count_tree(node, stats):
         count_tree(c, stats)
 
 
+def collect_ids(categories):
+    ids = set()
+
+    def walk(n):
+        for a in n.get("albums", []):
+            ids.add(a["id"])
+        for c in n.get("children", []):
+            walk(c)
+
+    for cat in categories:
+        walk(cat)
+    return ids
+
+
+def probe_album(aid):
+    """Return (aid, title, n_eps) if album aid exists, else None."""
+    try:
+        res = video_list(aid)
+        rows = (res.get("data", {}) or {}).get("rows") or []
+        alb = (res.get("data", {}) or {}).get("album") or {}
+        if rows or alb.get("id"):
+            return (aid, alb.get("title") or "", len(rows))
+    except Exception:
+        pass
+    return None
+
+
+def discover_orphans(known_ids, hi=None, margin=30):
+    """Probe album IDs for albums not reachable via category traversal.
+
+    hi defaults to max(known)+margin. Returns {aid: (title, n_eps)}.
+    """
+    top = (max(known_ids) if known_ids else 0) if hi is None else hi
+    lo = 1
+    found = {}
+    with ThreadPoolExecutor(max_workers=10) as pool:
+        futures = {pool.submit(probe_album, aid): aid for aid in range(lo, top + margin + 1)}
+        for fut in as_completed(futures):
+            r = fut.result()
+            if r and r[0] not in known_ids:
+                found[r[0]] = (r[1], r[2])
+            sleep(5)
+    return found
+
+
 def main():
     tops = category_list("video").get("data", {}).get("rows") or []
     print("Top-level video categories: {}".format(len(tops)))
@@ -121,11 +166,63 @@ def main():
     for top in tops:
         sys.stdout.write("  fetching {} ... ".format(top["title"]))
         sys.stdout.flush()
-        node = walk_category({"id": top["id"], "title": top["title"]}, [])
+        node = walk_category({"id": top["id"], "title": top["title"]}, [], "video")
         categories.append(node)
         stats = {"albums": 0, "episodes": 0}
         count_tree(node, stats)
         sys.stdout.write("{} albums, {} episodes\n".format(stats["albums"], stats["episodes"]))
+
+    # news model (視頻更新): video albums surfaced as news, not under video cats
+    try:
+        news_tops = category_list("news").get("data", {}).get("rows") or []
+    except Exception:
+        news_tops = []
+    for top in news_tops:
+        sys.stdout.write("  fetching news:{} ... ".format(top["title"]))
+        sys.stdout.flush()
+        node = walk_category({"id": top["id"], "title": top["title"]}, [], "news")
+        # skip albums already filed under video categories (e.g. aid 287)
+        known = collect_ids(categories)
+        node["albums"] = [a for a in node["albums"] if a["id"] not in known]
+        for ch in node.get("children", []):
+            ch["albums"] = [a for a in ch.get("albums", []) if a["id"] not in known]
+        categories.append(node)
+        stats = {"albums": 0, "episodes": 0}
+        count_tree(node, stats)
+        sys.stdout.write("{} albums, {} episodes\n".format(stats["albums"], stats["episodes"]))
+
+    # orphan discovery: albums reachable via video/list but attached to no category
+    # (e.g. aid 305 再談弟子規 while category 66 lists 0 albums).
+    known = collect_ids(categories)
+    title_to_cat = {c["title"]: c for c in categories}
+    orphans = discover_orphans(known)
+    print("  orphan albums (no category link): {}".format(len(orphans)))
+    unfiled = {"id": 0, "title": "未分類", "path": ["未分類"], "albums": [], "children": []}
+    attached = 0
+    # fetch episodes for orphans
+    orphan_albums = [
+        {"id": aid, "title": title or "aid-{}".format(aid), "total": n, "path": ["未分類"]}
+        for aid, (title, n) in sorted(orphans.items())
+    ]
+    with ThreadPoolExecutor(max_workers=min(CONCURRENCY, len(orphan_albums) or 1)) as pool:
+        futures = {pool.submit(fetch_album_episodes, alb): alb for alb in orphan_albums}
+        for fut in as_completed(futures):
+            alb = futures[fut]
+            alb = {**alb, "episodes": fut.result()}
+            # exact title match → file under that category (e.g. 305→66 再談弟子規)
+            target = title_to_cat.get(alb["title"])
+            if target is not None:
+                alb = {**alb, "path": [target["title"]]}
+                target["albums"].append(alb)
+                attached += 1
+                print("    attached aid {} {!r} → {}".format(alb["id"], alb["title"], target["title"]))
+            else:
+                unfiled["albums"].append(alb)
+            sleep(20)
+    if unfiled["albums"]:
+        categories.append(unfiled)
+        print("  filed {} orphans under 未分類".format(len(unfiled["albums"])))
+    print("  title-matched orphans attached: {}".format(attached))
 
     stats = {"categories": len(categories), "albums": 0, "episodes": 0}
     for c in categories:

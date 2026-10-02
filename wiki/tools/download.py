@@ -118,8 +118,17 @@ def process_episode(episode, album, album_index, album_total, dry_run):
         return {"status": "error", "num": num}
 
 
+def ep_sort_key(ep):
+    # API row order is recency-based, NOT episode order. Use the episode
+    # field when present, else fall back to num order, so 第N集 is correct.
+    try:
+        return (0, int(ep.get("episode")))
+    except (TypeError, ValueError):
+        return (1, ep.get("num") or ep.get("video") or ep.get("audio") or "")
+
+
 def process_album(album, dry_run):
-    episodes = album.get("episodes") or []
+    episodes = sorted(album.get("episodes") or [], key=ep_sort_key)
     if not episodes:
         return
     first = episodes[0]
